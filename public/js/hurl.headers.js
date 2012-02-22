@@ -38,6 +38,7 @@
     "Accept": ["*/*", "text/plain", "text/html, text/plain", "application/xml", "application/json"],
     "Accept-Encoding": [ "compress", "deflate", "gzip", "compress, gzip", "gzip, deflate"],
     "Accept-Language": [ "en", "es", "de", "fr", "*" ],
+    "Authorization": null,
     "Cache-Control": [ "cache", "no-cache" ],
     "Connection": [ "close", "keep-alive" ],
     "Cookie": null,
