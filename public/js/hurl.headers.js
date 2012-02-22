@@ -1,5 +1,7 @@
 (function() {
   $.fn.hurlHeaders = function(el) {
+    if (el == undefined)
+      el = this;
     $(el).autocompleteArray(keyNames( Headers ), {
       delay: 40,
       onItemSelect: function(e) {
