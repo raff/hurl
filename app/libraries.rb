@@ -51,8 +51,6 @@ module Sinatra
         #
         # Supports a variety of methods, name, full_name, email, etc
         def github_user
-          puts "warden: " + warden.inspect
-          puts "warden.winning: " + warden.winning_strategy.inspect
           warden.user
         end
       end
