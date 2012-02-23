@@ -21,6 +21,7 @@ module Hurl
     }
 
     enable :sessions
+    set :session_secret, "hurl-is-curl"
 
     if ENV['HURL_CLIENT_ID']
         set :github_options, { :client_id    => ENV['HURL_CLIENT_ID'],
