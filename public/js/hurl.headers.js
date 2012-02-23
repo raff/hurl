@@ -35,15 +35,15 @@
   }
 
   var Headers = {
-    "Accept": ["*/*", "text/plain", "text/html, text/plain", "application/xml", "application/json"],
-    "Accept-Encoding": [ "compress", "deflate", "gzip", "compress, gzip", "gzip, deflate"],
+    "Accept": ["*/*", "text/plain", "text/html, text/plain", "application/xml", "application/json", "application/vnd." ],
+    "Accept-Encoding": [ "compress", "deflate", "gzip", "compress, gzip", "gzip, deflate" ],
     "Accept-Language": [ "en", "es", "de", "fr", "*" ],
     "Authorization": null,
     "Cache-Control": [ "cache", "no-cache" ],
     "Connection": [ "close", "keep-alive" ],
     "Cookie": null,
     "Content-Length": null,
-    "Content-Type": [ "application/octet-stream", "application/x-www-form-urlencoded", "application/xml", "application/json", "text/html", "text/plain", "text/xml" ],
+    "Content-Type": [ "application/octet-stream", "application/x-www-form-urlencoded", "application/xml", "application/json", "text/html", "text/plain", "text/xml", "application/vnd." ],
     "From": null,
     "Host": null,
     "If-Match": [ "*" ],
