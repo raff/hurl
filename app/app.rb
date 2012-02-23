@@ -7,10 +7,10 @@ module Hurl
 
     dir = File.dirname(File.expand_path(__FILE__))
 
-    set :public,   "#{dir}/public"
-    set :root,     RACK_ROOT
-    set :app_file, __FILE__
-    set :static,   true
+    set :public_folder, "#{dir}/public"
+    set :root,          RACK_ROOT
+    set :app_file,      __FILE__
+    set :static,        true
 
     set :views, "#{dir}/templates"
 
@@ -22,12 +22,16 @@ module Hurl
 
     enable :sessions
 
-    set :github_options, { :client_id    => ENV['HURL_CLIENT_ID'],
-                           :secret       => ENV['HURL_SECRET'],
-                           :scopes       => '',
-                           :callback_url => '/login/callback/' }
+    if ENV['HURL_CLIENT_ID']
+        set :github_options, { :client_id    => ENV['HURL_CLIENT_ID'],
+                               :secret       => ENV['HURL_SECRET'],
+                               :scopes       => '',
+                               :callback_url => '/login/callback/' }
 
-    register ::Sinatra::Auth::Github
+        register ::Sinatra::Auth::Github
+    else
+        register ::Sinatra::Auth::Local
+    end
 
     def initialize(*args)
       super
@@ -42,7 +46,7 @@ module Hurl
 
     before do
       if authenticated?
-        @user = User.new(github_user)
+        @user = Hurl::User.new(github_user)
       end
 
       @flash = session.delete('flash')

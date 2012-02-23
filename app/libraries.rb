@@ -26,3 +26,51 @@ require 'models/db'
 require 'models/user'
 
 require 'views/layout'
+
+module Sinatra
+  module Auth
+    module Local
+      module Helpers
+        def warden
+          env['warden']
+        end
+
+        def authenticate!(*args)
+          warden.authenticate!(*args)
+        end
+
+        def authenticated?(*args)
+          warden.authenticated?(*args)
+        end
+
+        def logout!
+          warden.logout
+        end
+
+        # The authenticated user object
+        #
+        # Supports a variety of methods, name, full_name, email, etc
+        def github_user
+          puts "warden: " + warden.inspect
+          puts "warden.winning: " + warden.winning_strategy.inspect
+          warden.user
+        end
+      end
+
+      def self.registered(app)
+        Warden::Strategies.add(:local) do
+          def authenticate!
+            success!(Warden::Github::Oauth::User.new({
+		'login' => 'local', 'id' => 'local' }, 'localtoken'))
+          end
+        end
+
+        app.use Warden::Manager do |manager|
+          manager.default_strategies :local
+        end
+
+        app.helpers Helpers
+      end
+    end
+  end
+end
